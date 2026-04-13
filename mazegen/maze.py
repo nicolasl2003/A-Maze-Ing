@@ -197,8 +197,8 @@ class Maze:
         try:
             with open(self.output_file, "w") as f:
                 f.write(f"{self.__str__()}\n\n")
-                f.write(f"{self.entry.x}.{self.entry.y}\n")
-                f.write(f"{self.exit_.x}.{self.exit_.y}\n")
-                f.write(f"{self.path_to_moves(self.__path)}")
+                f.write(f"{self.entry.x},{self.entry.y}\n")
+                f.write(f"{self.exit_.x},{self.exit_.y}\n")
+                f.write(f"{self.path_to_moves(self.__path)}\n")
         except ValueError as e:
             print(f"Failed to write maze to output file: {e}")
