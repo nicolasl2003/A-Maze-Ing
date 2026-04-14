@@ -42,7 +42,7 @@ class TUIRenderer:
         self.__row_cache: list[Text] | None = None
         self.__cache_color: str = ""
         self.__show_path: bool = False
-        self.__last_size:  tuple[int, int] = 0, 0
+        self.__last_size: tuple[int, int] = 0, 0
 
         self.__key_queue: queue.Queue[str] = queue.Queue()
 
@@ -120,11 +120,16 @@ class TUIRenderer:
         self.__view_height = max(1, height - 9)
         needed = 2 * (2 * self._maze.width + 1) + 10
 
+        text_pattern = (
+            "" if (self._maze.pattern) else "Can't render the 42 pattern"
+        )
         inner = (
             self._render_too_narrow(width, needed)
             if width < needed
             else Group(
-                self._render_maze(color), Text(""), self._render_menu(color)
+                self._render_maze(color),
+                Text(text_pattern, justify="center", style="bold red"),
+                self._render_menu(color),
             )
         )
         return Panel(
@@ -141,9 +146,7 @@ class TUIRenderer:
         """Render warning when terminal is too narrow."""
         return Group(
             Text(""),
-            Text(
-                "⚠  terminal too narrow", justify="center", style="bold red"
-            ),
+            Text("⚠  terminal too narrow", justify="center", style="bold red"),
             Text("─" * 28, justify="center", style="dim red"),
             Text(""),
             Text(f"need   {need} cols", justify="center", style="dim"),

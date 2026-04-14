@@ -10,7 +10,6 @@ def main() -> None:
         print("File argument not found!\nUsage: a_maze_ing.py config.txt")
         sys.exit(1)
     try:
-        print(sys.argv[0])
         cfg = Config(sys.argv[1])
     except (ValueError, FileNotFoundError) as e:
         print(f"Error during parsing: {e}")

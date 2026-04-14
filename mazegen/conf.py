@@ -47,7 +47,7 @@ class Config:
                         raise ValueError(
                             f"line {lineno}: expected KEY=VALUE, got {line!r}"
                         )
-                    key, value = line.split("=")
+                    key, value = line.split("=", maxsplit=1)
                     # Not sure ??? Remove whitespace or no maybe of to check
                     # and raise an error
                     result[key.strip()] = value.strip()
